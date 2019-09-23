@@ -80,10 +80,10 @@ Vagrant.configure("2") do |config|
     # Setup our tools for cross-compiling for the Raspberry Pi.
     echo export PI_TOOLS="/home/vagrant/pitools" >> /home/vagrant/.bashrc
     echo CMAKE_XC_TC="/home/vagrant/shared/toolchain-raspberrypi.cmake" >> /home/vagrant/.bashrc
-    source /home/vagrant/.bashrc
+    echo 'alias cmake-build="rm -rf build/ && mkdir build && cd build && cmake .. -DCMAKE_TOOLCHAIN_FILE=$CMAKE_XC_TC"' >> /home/vagrant/.bashrc
 
     git clone --depth=1 https://github.com/raspberrypi/tools.git /home/vagrant/pitools
-    echo PATH=\$PATH:$PI_TOOLS/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin >> /home/vagrant/.bashrc
+    echo PATH=\$PATH:/home/vagrant/pitools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin >> /home/vagrant/.bashrc
 
     # Sets default working directory
     echo "cd /home/vagrant/shared" >> /home/vagrant/.bashrc
